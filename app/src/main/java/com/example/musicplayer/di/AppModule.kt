@@ -1,6 +1,8 @@
 package com.example.musicplayer.di
 
+import android.app.Application
 import android.content.Context
+import com.example.musicplayer.data.remotedatabase.MusicLocalDatabase
 import com.example.musicplayer.data.remotedatabase.MusicRemoteDatabase
 import com.example.musicplayer.data.repository.MusicRepositoryImpl
 import com.example.musicplayer.data.service.MusicControllerImpl
@@ -29,13 +31,20 @@ object AppModule {
     fun provideMusicDatabase(songCollection: CollectionReference) =
         MusicRemoteDatabase(songCollection)
 
+    @Singleton
+    @Provides
+    fun provideMusicLocalDatabase(@ApplicationContext context:Context) =
+        MusicLocalDatabase(context)
+
 
     @Singleton
     @Provides
     fun provideMusicRepository(
         musicRemoteDatabase: MusicRemoteDatabase,
+        musicLocalDatabase: MusicLocalDatabase,
+        @ApplicationContext context: Context
     ): MusicRepository =
-        MusicRepositoryImpl(musicRemoteDatabase)
+        MusicRepositoryImpl(musicRemoteDatabase, musicLocalDatabase, context)
 
     @Singleton
     @Provides

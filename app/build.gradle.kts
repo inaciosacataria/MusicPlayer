@@ -88,4 +88,6 @@ dependencies {
 //    api(libs.bundles.exoplayer)
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.session)
+    implementation ("com.github.omicronapps:7-Zip-JBinding-4Android:Release-16.02-2.02")
+    implementation ("net.lingala.zip4j:zip4j:2.9.0")
 }

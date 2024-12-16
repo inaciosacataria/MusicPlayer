@@ -235,7 +235,8 @@ fun SongScreenContent(
                                 .aspectRatio(1f)
 
                         ) {
-                            AnimatedVinyl(painter = imagePainter, isSongPlaying = isSongPlaying)
+                           // AnimatedVinyl(painter = imagePainter, isSongPlaying = isSongPlaying)
+                            Image(painter = imagePainter, contentDescription = null)
                         }
 
                         Text(

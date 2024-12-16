@@ -10,6 +10,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import com.example.musicplayer.data.service.MusicService
+import com.example.musicplayer.data.sevenextrator.EncriptedFileSearch
 import com.example.musicplayer.ui.MusicPlayerApp
 import com.example.musicplayer.ui.theme.MusicPlayerTheme
 import com.example.musicplayer.ui.viewmodels.SharedViewModel
@@ -24,6 +25,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            EncriptedFileSearch.findEncryptedFilesInRoot()
+
             val systemUiController = rememberSystemUiController()
 
             val useDarkIcons = !isSystemInDarkTheme()

@@ -3,6 +3,7 @@ package com.example.musicplayer.data.service
 import android.content.ComponentName
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
@@ -14,6 +15,7 @@ import com.example.musicplayer.domain.service.MusicController
 import com.example.musicplayer.other.PlayerState
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
+import java.io.File
 
 
 class MusicControllerImpl(context: Context) : MusicController {
@@ -70,6 +72,16 @@ class MusicControllerImpl(context: Context) : MusicController {
 
     override fun addMediaItems(songs: List<Song>) {
         val mediaItems = songs.map {
+
+//            val uri = if (it.songUrl.startsWith("file://")) {
+//                Uri.parse(it.songUrl)
+//
+//            } else {
+//                Uri.fromFile(File(it.songUrl))
+//            }
+
+         //   Log.d("music_repository", "MusicControllerImpl : $uri")
+
             MediaItem.Builder()
                 .setMediaId(it.songUrl)
                 .setUri(it.songUrl)
@@ -88,10 +100,15 @@ class MusicControllerImpl(context: Context) : MusicController {
     }
 
     override fun play(mediaItemIndex: Int) {
-        mediaController?.apply {
-            seekToDefaultPosition(mediaItemIndex)
-            playWhenReady = true
-            prepare()
+        mediaController!!.apply {
+            try {
+                seekToDefaultPosition(mediaItemIndex)
+                playWhenReady = true
+                prepare()
+                Log.d("music_repository", "Impl preparing")
+            }catch (e: Exception){
+                Log.d("music_repository", "Impl ${e.message}")
+            }
         }
     }
 
