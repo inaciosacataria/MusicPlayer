@@ -5,9 +5,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BookmarkAdded
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -26,8 +33,12 @@ fun HomeAppBar(
 ) {
     TopAppBar(
         title = {
-            Row (verticalAlignment = Alignment.CenterVertically){
-                Image(painter = painterResource(R.drawable.letter), contentDescription = null, modifier = Modifier.size(30.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(R.drawable.letter),
+                    contentDescription = null,
+                    modifier = Modifier.size(30.dp)
+                )
                 Text(
                     modifier = Modifier
                         .padding(start = 8.dp),
@@ -37,7 +48,11 @@ fun HomeAppBar(
         },
         backgroundColor = backgroundColor,
         actions = {
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+            IconButton(onClick = { /* TODO: Handle search click */ }) {
+                Icon(
+                    imageVector = Icons.Default.BookmarkAdded,
+                    contentDescription = "Add"
+                )
             }
         },
         modifier = modifier

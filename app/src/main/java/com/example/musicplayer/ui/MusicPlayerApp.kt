@@ -25,6 +25,12 @@ import com.example.musicplayer.ui.home.HomeViewModel
 import com.example.musicplayer.ui.viewmodels.SharedViewModel
 import com.example.musicplayer.ui.songscreen.SongViewModel
 
+
+sealed class Mavigatin(route: String) {
+    object Home : Mavigatin("home")
+    object Song : Mavigatin("song")
+
+}
 @Composable
 fun MusicPlayerApp(sharedViewModel: SharedViewModel) {
     val navController = rememberNavController()
@@ -65,6 +71,15 @@ fun MusicPlayerNavHost(navController: NavHostController, sharedViewModel: Shared
                     onBarClick = { navController.navigate(Destination.songScreen) }
                 )
             }
+        }
+
+        composable(route = Destination.songScreen) {
+            val songViewModel: SongViewModel = hiltViewModel()
+            SongScreen(
+                onEvent = songViewModel::onEvent,
+                musicControllerUiState = musicControllerUiState,
+                onNavigateUp = { navController.navigateUp() }
+            )
         }
 
         composable(route = Destination.songScreen) {
